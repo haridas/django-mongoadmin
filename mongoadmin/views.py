@@ -69,6 +69,10 @@ class MongoAdmin(object):
         class ThisMongoAdminForm(self.form):
             class Meta:
                 document = self.model
+                if(hasattr(self,'fields')):
+                    "Adding Django Form fields feature."
+                    fields = self.fields
+                
         return ThisMongoAdminForm(self, *args, **kwargs)
 
 class MongoAdminSite(object):
