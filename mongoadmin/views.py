@@ -22,7 +22,7 @@ from mongoengine.django.shortcuts import get_document_or_404, get_list_or_404
 LOGIN_FORM_KEY = 'this_is_the_login_form'
 
 class MongoAdmin(object):
-    group = 'Documents'
+    group = ''
     list_items = []
     verbose_name = None
     verbose_name_plural = None
@@ -40,6 +40,8 @@ class MongoAdmin(object):
             self.verbose_name = get_verbose_name(self.model_name)
         if not self.verbose_name_plural:
             self.verbose_name_plural = '%ss' % self.verbose_name
+        if not self.group:
+            self.group = model.__module__.split(".")[0]
 
         ## Validations
         for attr in self.list_items:
